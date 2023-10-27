@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Response } from "express";
 import ip from "ip";
 import cors from "cors"
 import { Code } from "./enum/code.enum";
@@ -31,7 +31,7 @@ export class App {
     }
     private routes(): void {
         this.app.use('/products', productsRoutes);
-        this.app.get('/', (_, res) => res.status(Code.OK).send(new HttpResponse(Code.OK, Status.OK, 'welcome to the e-commerce')));
-        this.app.all('*', (_, res) => res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)));
+        this.app.get('/', (_, res: Response) => res.status(Code.OK).send(new HttpResponse(Code.OK, Status.OK, 'welcome to the e-commerce')));
+        this.app.all('*', (_, res: Response) => res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)));
     }
 }
