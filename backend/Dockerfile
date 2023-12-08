@@ -1,13 +1,11 @@
-FROM node:14
+FROM node:18.16.1
 
-WORKDIR /app
+WORKDIR /usr/code
+COPY package*.json .
 
-COPY package*.json ./
-
-RUN npm install
-
+RUN npm i
 COPY . .
+ENV SERVER_PORT 8000
+EXPOSE $SERVER_PORT
 
-EXPOSE 3000
-
-CMD [ "node", "src/index.ts" ]
+CMD [ "npm", "run", "start:prod" ]
